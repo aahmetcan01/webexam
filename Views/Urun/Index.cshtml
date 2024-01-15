@@ -1,0 +1,36 @@
+﻿@using MVCStok.Models.Entity;
+@model List<TBLUrunler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Urun Id</th>
+        <th>urunAd</th>
+        <th>urunKategori</th>
+        <th>fiyat</th>
+        <th>marka</th>
+        <th>stok</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    <tbody>
+        @foreach (var urn in Model)
+        {
+        <tr>
+            <th>@urn.urunId</th>
+            <td>@urn.urunAd</td>
+            <td>@urn.urunKategori</td>
+            <td>@urn.fiyat</td>
+            <td>@urn.marka</td>
+            <td>@urn.stok</td>
+            <td><a href="/Urun/Sil/@urn.urunId" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Urun/Güncelle/@urn.urunId" class="btn btn-success">Güncelle</a></td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+<a href="/Urun/UrunEkle/" class="btn btn-primary">Ürün Ekle</a>

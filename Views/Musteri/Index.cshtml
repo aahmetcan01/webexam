@@ -1,0 +1,29 @@
+﻿@using MVCStok.Models.Entity;
+@model List<TBLMusteriler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class="table table-bordered" >
+    <tr>
+        <th>Müşteri Id</th>
+        <td>Müşteri Ad</td>
+        <td>Müşteri Soyad</td>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    <tbody>
+        @foreach (var mstr in Model)
+        {
+        <tr>
+            <th>@mstr.musteriId</th>
+            <td>@mstr.musteriAd</td>
+            <td>@mstr.musteriSoyad</td>
+            <td><a href="/Musteri/Sil/@mstr.musteriId" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Musteri/Güncelle/@mstr.musteriId" class="btn btn-success">Güncelle</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a href="/Musteri/MusteriEkle/" class="btn btn-primary">Yeni Müşteri</a>

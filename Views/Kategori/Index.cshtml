@@ -1,0 +1,69 @@
+﻿@using MVCStok.Models.Entity;
+@model List<TBLKategoriler>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>Kategori Id</th>
+        <th>Kategori Ad</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    <tbody>
+        @foreach (var ktgr in Model)
+        {
+            <tr>
+                <th>@ktgr.KategoriId</th>
+                <td>@ktgr.KategoriAd</td>
+                <td><a href="/Kategori/Sil/@ktgr.KategoriId" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Kategori/Güncelle/@ktgr.KategoriId" class="btn btn-success">Güncelle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Kategori/YeniKategori/" class="btn btn-primary">Yeni Kategori</a>
+<br />
+<br />
+
+<div>
+    <label>Yeni Kategori</label>
+    <input id="inputajax" class="form-control" name="KategoriAd" />
+    <button id="btnajax" class="btn btn-primary">Yeni Kategori Ajax</button>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnajax").click(function () {
+            let ktgr = {
+                KategoriAd: $("#inputajax").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Kategori/YeniKategori", 
+                data: ktgr,
+                success: function () {
+                    
+                    alert("Yeni kategori eklendi");
+
+                    
+                    $.get("/Kategori/Index", function (data) {
+                        $(".table").html($(data).find(".table"));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
+
+
+
